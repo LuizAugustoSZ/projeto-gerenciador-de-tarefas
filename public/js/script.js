@@ -1,6 +1,14 @@
 $(document).ready(function () {
     carregarTarefas();
 
+        $("#filterStatus").on("change", function () {
+        carregarTarefas();
+    });
+
+    $("#search").on("keyup", function () {
+        carregarTarefas();
+    });
+
     // Salvar tarefa (criar + editar)
     $("#formTask").on("submit", function (e) {
         e.preventDefault();
@@ -19,11 +27,24 @@ $(document).ready(function () {
     });
 });
 
-function carregarTarefas(page = 1) {
-    $.get("controllers/task_list.php", { page }, function (res) {
+function carregarTarefas() {
+
+    let status = $("#filterStatus").val();
+    let search = $("#search").val().trim();
+
+    $.get("controllers/task_list.php", { status, search }, function (res) {
         if (!res.success) return;
 
         let html = "";
+
+        if (res.tasks.length === 0) {
+            $("#tasksList").html(`
+                <p class="text-muted text-center mt-3">
+                    Nenhuma tarefa encontrada.
+                </p>
+            `);
+            return;
+        }
 
         res.tasks.forEach(t => {
             html += `
@@ -46,6 +67,7 @@ function carregarTarefas(page = 1) {
         $("#tasksList").html(html);
     });
 }
+
 
 function toggleTask(id) {
     $.post("controllers/task_toggle.php", { id }, function (res) {

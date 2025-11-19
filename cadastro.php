@@ -1,26 +1,53 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
+  <meta charset="utf-8">
   <title>Cadastro</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background: #f2f2f2; }
+    .card { border-radius: 12px; }
+  </style>
 </head>
 <body>
 
-<h2>Criar Conta</h2>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card p-4 shadow" style="max-width: 380px; width: 100%;">
 
-<?php
-if (isset($_GET['erro']) && $_GET['erro'] == 'email') {
-    echo "<p style='color:red;'>E-mail já está sendo usado.</p>";
-}
-?>
+    <h3 class="text-center mb-3">Criar Conta</h3>
 
-<form action="controllers/auth_register.php" method="POST">
-  <input type="text" name="nome" placeholder="Seu nome" required><br><br>
-  <input type="email" name="email" placeholder="Seu e-mail" required><br><br>
-  <input type="password" name="senha" placeholder="Sua senha" required><br><br>
-  <button type="submit">Cadastrar</button>
-</form>
+    <?php if (isset($_GET['erro']) && $_GET['erro'] == 'email'): ?>
+      <div class="alert alert-danger py-2 text-center">
+        Esse e-mail já está sendo usado.
+      </div>
+    <?php endif; ?>
 
-<p><a href="index.php">Voltar ao login</a></p>
+    <form action="controllers/auth_register.php" method="POST">
+      <div class="mb-3">
+        <label>Nome</label>
+        <input type="text" name="nome" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label>E-mail</label>
+        <input type="email" name="email" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label>Senha</label>
+        <input type="password" name="senha" class="form-control" required>
+      </div>
+
+      <button class="btn btn-primary w-100 mt-2">Cadastrar</button>
+    </form>
+
+    <p class="text-center mt-3 mb-0">
+      <a href="index.php">Já tenho conta</a>
+    </p>
+
+  </div>
+</div>
 
 </body>
 </html>

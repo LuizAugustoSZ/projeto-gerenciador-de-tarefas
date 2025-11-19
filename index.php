@@ -1,22 +1,48 @@
 <?php session_start(); ?>
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
+  <meta charset="utf-8">
   <title>Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background: #f2f2f2; }
+    .card { border-radius: 12px; }
+  </style>
 </head>
 <body>
 
-<h2>Login</h2>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card p-4 shadow" style="max-width: 380px; width: 100%;">
+    
+    <h3 class="text-center mb-3">Entrar</h3>
 
-<?php if (isset($_GET['erro'])) echo "<p style='color:red;'>E-mail ou senha inválidos!</p>"; ?>
+    <?php if (isset($_GET['erro'])): ?>
+      <div class="alert alert-danger py-2 text-center">
+        E-mail ou senha inválidos!
+      </div>
+    <?php endif; ?>
 
-<form action="controllers/auth_login.php" method="POST">
-  <input type="email" name="email" placeholder="Seu e-mail" required><br><br>
-  <input type="password" name="senha" placeholder="Sua senha" required><br><br>
-  <button type="submit">Entrar</button>
-</form>
+    <form action="controllers/auth_login.php" method="POST">
+      <div class="mb-3">
+        <label>Email</label>
+        <input type="email" name="email" class="form-control" required>
+      </div>
 
-<p><a href="cadastro.php">Criar conta</a></p>
+      <div class="mb-3">
+        <label>Senha</label>
+        <input type="password" name="senha" class="form-control" required>
+      </div>
+
+      <button class="btn btn-primary w-100 mt-2">Entrar</button>
+    </form>
+
+    <p class="text-center mt-3 mb-0">
+      <a href="cadastro.php">Criar conta</a>
+    </p>
+
+  </div>
+</div>
 
 </body>
 </html>

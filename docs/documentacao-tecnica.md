@@ -23,8 +23,6 @@ jQuery (AJAX)
 XAMPP
 
 2. Banco de Dados
-Diagrama Lógico
-Users (1) ----- (N) Tasks
 
 Estrutura SQL
 CREATE TABLE users (
